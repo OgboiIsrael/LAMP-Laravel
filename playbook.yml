@@ -1,0 +1,11 @@
+---
+- hosts: slave
+  become: yes
+  tasks:
+    - name: Execute LAMP + Laravel setup script
+      script: Lamp+Laravel.sh
+
+    - name: Create a cron job for checking uptime
+      cron:
+        name: "Check Uptime"
+        job: "0 0 * * * /usr/bin/uptime > /var/log/uptime.log"
